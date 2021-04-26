@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Button } from "../Button/button";
 
-const Form = () => {
+export const Form = () => {
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
   const [direction, setDirection] = useState<string>("North");
@@ -47,7 +48,7 @@ const Form = () => {
     }
   };
 
-  const handleMove = () => {
+  const handleMove = (): void => {
     if (!isValid) {
       setErrorMessage(PLACE_ROBOT_ERROR_MESSAGE);
     } else {
@@ -177,20 +178,13 @@ const Form = () => {
         </div>
         <input type="submit" value="Place"></input>
       </form>
-      <button type="button" onClick={handleMove}>
-        Move
-      </button>
-      <button type="button" onClick={handleLeft}>
-        Left
-      </button>
-      <button type="button" onClick={handleRight}>
-        Right
-      </button>
-      <button type="button" onClick={handleReport}>
-        Report
-      </button>
+      <Button clicked={handleMove}>Move</Button>
+
+      <Button clicked={handleLeft}>Left</Button>
+
+      <Button clicked={handleRight}>Right</Button>
+
+      <Button clicked={handleReport}>Report</Button>
     </>
   );
 };
-
-export default Form;
