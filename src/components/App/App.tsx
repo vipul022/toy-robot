@@ -10,11 +10,6 @@ const App = () => {
       </header>
       <h4>Place your robot on the table</h4>
       <Form />
-
-      <button type="button">Move</button>
-      <button type="button">Left</button>
-      <button type="button">Right</button>
-      <button type="button">Report</button>
     </>
   );
 };
