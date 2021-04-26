@@ -1,20 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 
-const App = () => {
-  return (
-    <>
-      <header>
-        <h1>Toy Robot</h1>
-      </header>
-      <h4>Place your robot on the table</h4>
-      <form>
+const Form =() => {
+  const [x, setX] = useState<number>(0);
+  const [y, setY] = useState<number>(0);
+  const [direction, setDirection] = useState<string>('North');
+  
+  interface FormState {
+    x: number;
+    y: number;
+    direction: string;
+  }
+
+  const initialFormState: FormState = {
+    x: 0,
+    y: 0,
+    direction: "north"
+  };
+  return(
+    <form>
         <div>
-          <label htmlFor="x-coordinates">X-coordinates</label>
-          <input type="number" name="x-coordinates" id="x- coordinates"></input>
+          <label htmlFor="x">X-coordinates</label>
+          <input type="number" name="x" id="x" min ="0"></input>
         </div>
         <div>
-          <label htmlFor="y-coordinates">Y-coordinates</label>
-          <input type="number" name="y-coordinates" id="y- coordinates"></input>
+          <label htmlFor="y">Y-coordinates</label>
+          <input type="number" name="y" id="y" min ="0"></input>
         </div>
         <div>
           <label htmlFor="north">North</label>
@@ -28,8 +38,7 @@ const App = () => {
         </div>
         <input type="submit" value="Place"></input>
       </form>
-    </>
-  );
-};
+  )
+}
 
-export default App;
+export default Form;
