@@ -133,12 +133,13 @@ export const Form = () => {
       setErrorMessage(PLACE_ROBOT_ERROR_MESSAGE);
     } else {
       setReport(
-        `The current position of your robot is ${x}, ${y}, ${direction}`
+        `The current position of your robot is ${Number(x)}, ${Number(y)}, ${direction}`
       );
       setErrorMessage("");
       setHideMessage(false);
     }
   };
+  console.log("type of x=> ", typeof x);
   console.log("report=>", x, y, direction);
 
   return (
@@ -208,12 +209,13 @@ export const Form = () => {
       <Button clicked={handleRight}>Right</Button>
 
       <Button clicked={handleReport}>Report</Button>
+
       {report && <p style={{ color: "green" }}>{report}</p>}
 
       {!errorMessage && hideMessage && direction !== "" ? (
         <p style={{ color: "green" }}>
-          Your robot has been successfully placed on table at {x}, {y} facing
-          towards {direction}
+          Your robot has been successfully placed on table at {Number(x)},{" "}
+          {Number(y)} facing towards {direction}
         </p>
       ) : (
         ""
