@@ -1,22 +1,16 @@
 import React from "react";
-import Form from "../Form/form";
-import Button from "../Button/button";
+import { Form } from "../Form/form";
+import { Header } from "../Header/header";
 
-const App = () => {
+export const App = () => {
   return (
     <>
-      <header>
+      <Header />
+      {/* <header>
         <h1>Toy Robot</h1>
-      </header>
-      <h4>Place your robot on the table</h4>
+        <h4>Place your robot on the table</h4>
+      </header> */}
       <Form />
-
-      <button type="button">Move</button>
-      <button type="button">Left</button>
-      <button type="button">Right</button>
-      <button type="button">Report</button>
     </>
   );
 };
-
-export default App;
