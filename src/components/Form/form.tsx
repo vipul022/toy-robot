@@ -133,15 +133,24 @@ export const Form = () => {
       setErrorMessage(PLACE_ROBOT_ERROR_MESSAGE);
     } else {
       setReport(
-        `The current position of your robot is ${Number(x)}, ${Number(y)}, ${direction}`
+        `The current position of your robot is ${Number(x)}, ${Number(
+          y
+        )}, ${direction.toUpperCase()}`
       );
       setErrorMessage("");
       setHideMessage(false);
     }
   };
-  console.log("type of x=> ", typeof x);
-  console.log("report=>", x, y, direction);
 
+  const shouldDisplaySuccessMessage =
+    !errorMessage && hideMessage && direction !== "";
+
+  const successMessage = (
+    <p style={{ color: "green" }}>
+      Your robot has been successfully placed on table at {Number(x)},{" "}
+      {Number(y)} facing towards {direction.toUpperCase()}
+    </p>
+  );
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -167,7 +176,6 @@ export const Form = () => {
           ></input>
         </div>
         <div>
-          <label htmlFor="north">North</label>
           <input
             type="radio"
             id="north"
@@ -175,7 +183,8 @@ export const Form = () => {
             value="north"
             onChange={handleChange}
           ></input>
-          <label htmlFor="east">East</label>
+          <label htmlFor="north">North</label>
+
           <input
             type="radio"
             id="east"
@@ -183,7 +192,8 @@ export const Form = () => {
             value="east"
             onChange={handleChange}
           ></input>
-          <label htmlFor="south">South</label>
+          <label htmlFor="east">East</label>
+
           <input
             type="radio"
             id="south"
@@ -191,7 +201,8 @@ export const Form = () => {
             value="south"
             onChange={handleChange}
           ></input>
-          <label htmlFor="west">West</label>
+          <label htmlFor="south">South</label>
+
           <input
             type="radio"
             id="west"
@@ -199,6 +210,7 @@ export const Form = () => {
             value="west"
             onChange={handleChange}
           ></input>
+          <label htmlFor="west">West</label>
         </div>
         <input type="submit" value="Place"></input>
       </form>
@@ -212,14 +224,7 @@ export const Form = () => {
 
       {report && <p style={{ color: "green" }}>{report}</p>}
 
-      {!errorMessage && hideMessage && direction !== "" ? (
-        <p style={{ color: "green" }}>
-          Your robot has been successfully placed on table at {Number(x)},{" "}
-          {Number(y)} facing towards {direction}
-        </p>
-      ) : (
-        ""
-      )}
+      {shouldDisplaySuccessMessage ? successMessage : ""}
     </>
   );
 };

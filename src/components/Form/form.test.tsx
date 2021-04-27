@@ -7,11 +7,6 @@ describe("Form component renders as expected", () => {
   beforeEach(() => {
     render(<Form />);
   });
-
-  test("should render without crashing", () => {
-    screen.debug();
-  });
-
   test("should render label X-coordinates on screen", () => {
     screen.getByText(/X-coordinates/i).toBeInTheDocument;
   });
@@ -22,7 +17,6 @@ describe("Form component renders as expected", () => {
     const input = screen.getAllByRole("spinbutton");
 
     expect(input.length).toEqual(2);
-    // expect(screen.getAllByRole("textbox").length).toEqual(2);
   });
   test("should render all radio buttons", () => {
     const input = screen.getAllByRole("radio");
@@ -135,6 +129,88 @@ describe("Form component display data as expected", () => {
 
     expect(
       screen.getByText(/the current position of your robot is 3, 3, north/i)
+    ).toBeInTheDocument;
+  });
+
+  // Negative test cases
+
+  test("should render an error message if any other command is selected before successfully executing the place command", () => {
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /x\-coordinates/i }),
+      "1"
+    );
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /y\-coordinates/i }),
+      "1"
+    );
+    userEvent.type(screen.getByRole("radio", { name: /west/i }), "west");
+    const moveButton = screen.getByRole("button", { name: /move/i });
+    userEvent.click(moveButton);
+
+    expect(
+      screen.getByText(/please place your robot safely on the table first/i)
+    ).toBeInTheDocument;
+  });
+
+  test("should render an error message if direction is not selected", () => {
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /x\-coordinates/i }),
+      "1"
+    );
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /y\-coordinates/i }),
+      "1"
+    );
+    const placeButton = screen.getByRole("button", { name: /place/i });
+    userEvent.click(placeButton);
+
+    expect(
+      screen.getByText(
+        /please select the direction in which you want the robot to face/i
+      )
+    ).toBeInTheDocument;
+  });
+
+  test("should render an error message if invalid coordinates are selected", () => {
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /x\-coordinates/i }),
+      "6"
+    );
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /y\-coordinates/i }),
+      "4"
+    );
+    userEvent.type(screen.getByRole("radio", { name: /west/i }), "west");
+    const placeButton = screen.getByRole("button", { name: /place/i });
+    userEvent.click(placeButton);
+
+    expect(
+      screen.getByText(
+        /please enter valid coordinates \(0 \- 5\) to place your robot safely on table/i
+      )
+    ).toBeInTheDocument;
+  });
+
+  test("should render an error message if an invalid move is selected", () => {
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /x\-coordinates/i }),
+      "5"
+    );
+    userEvent.type(
+      screen.getByRole("spinbutton", { name: /y\-coordinates/i }),
+      "4"
+    );
+    userEvent.type(screen.getByRole("radio", { name: /east/i }), "east");
+    const placeButton = screen.getByRole("button", { name: /place/i });
+    userEvent.click(placeButton);
+
+    const moveButton = screen.getByRole("button", { name: /move/i });
+    userEvent.click(moveButton);
+
+    expect(
+      screen.getByText(
+        /sorry! you can't move further otherwise your robot will fall down from the table/i
+      )
     ).toBeInTheDocument;
   });
 });
