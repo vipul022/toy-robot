@@ -1,46 +1,190 @@
-# Getting Started with Create React App
+# Toy Robot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Steps to run the project on your local machine
 
-## Available Scripts
+Clone the repository into your machine by running the following command:
 
-In the project directory, you can run:
+`git clone https://github.com/vipul022/toy-robot.git`
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In your project directory, you can run :
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`yarn install`
 
-### `yarn test`
+This command will install all the dependencies for the project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run the app in the development mode, run the following command:
 
-### `yarn build`
+`yarn start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This will open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Run the following command to run all the unit tests:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`yarn test`
 
-### `yarn eject`
+## Tech Stack
+###### Front-end
+- React 
+- TypeScript
+###### Testing:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Jest
+- React testing library (RTL)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Test data
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. 
+###### User Input:  
+1
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+0
 
-## Learn More
+NORTH
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+PLACE  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+###### Output: 
+Your robot has been successfully placed on table at 1, 0 facing towards NORTH
+
+2. 
+###### User Input: 
+0
+
+0 
+
+NORTH
+
+PLACE
+
+MOVE
+
+REPORT
+
+###### Output:
+The current position of your robot is 0, 1, NORTH
+
+3.
+###### User Input:
+0
+
+0
+
+NORTH
+
+PLACE
+
+LEFT
+
+REPORT
+###### Output:
+The current position of your robot is 0, 0, WEST
+
+4.
+###### User Input:
+1
+
+2
+
+EAST
+
+PLACE
+
+MOVE
+
+MOVE
+
+LEFT
+
+MOVE
+
+REPORT
+
+###### Output:
+The current position of your robot is 3, 3, NORTH
+
+5.
+
+###### User Input:
+1
+
+1
+
+WEST
+
+MOVE
+
+###### Output:
+Please place your robot safely on the table first
+
+6.
+
+###### User Input:
+
+1
+
+1
+
+PLACE
+
+###### Output:
+Please select the direction in which you want the robot to face
+
+7.
+
+###### User Input:
+
+6
+
+4
+
+WEST
+
+PLACE
+
+###### Output:
+Please enter valid coordinates (0 - 5) to place your robot safely on table
+
+8.
+
+###### User Input:
+
+5
+
+4
+
+EAST
+
+PLACE
+
+MOVE
+
+###### Output:
+Sorry! you can't move further otherwise your robot will fall down from the table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
